@@ -265,7 +265,7 @@ def generate_df1(value, start_date, end_date, value1, value2, n_clicks):
                 dfmerged = pd.merge(df_h_mean,df_h_min,on='Fecha')
                 dfmerged = pd.merge(dfmerged,df_h_max,on='Fecha')
                 dfmerged = pd.merge(dfmerged,df_h_sum,on='Fecha')
-                dfmerged['ID_Estacion'] = 'COLCUBO28'
+                dfmerged['ID_Estacion'] = f'{station}'
                 dfinal = dfmerged[['ID_Estacion','Temp_celsius','N1','X1','Hum_Rel_%','N2','X2','Pto_Rocio_Celsius','N3','X3',
                                     'Presion_rel_hpa','N4','X4','Presion_abs_hpa','N5','X5','X6','Precip_interval_mm','Dir_viento_grados',
                                     'Vel_viento_kmh','X7','Rafaga_viento_kmh','X8','Enfriamiento_aire_celsius','Solar_rad_wm2','X13','X14']] 
