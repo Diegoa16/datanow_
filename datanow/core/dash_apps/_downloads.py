@@ -165,7 +165,7 @@ app.layout = html.Div([body_app])
 def generate_df1(value, start_date, end_date, value1, value2, n_clicks):
     if value:
         ## connecting to postgresql
-        conn = psycopg2.connect(host='meteoagronet2019.cagmafpkjkj9.us-west-1.rds.amazonaws.com', port = 5432, database='meteoagronet', user='meteoagro', password='kj1Nmkk1wxwO1WkL19k3')
+        conn = psycopg2.connect(host='', port = , database='', user='', password='')
         ## reset button
         changed_id = [p['prop_id'] for p in dash.callback_context.triggered][0]
         if 'submit-button-state1' in changed_id:
