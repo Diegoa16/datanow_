@@ -12,7 +12,7 @@ from django_plotly_dash import DjangoDash
 
 ## reading weather station ID dataset
 data = pd.read_csv("core/dash_apps/estaciones_mtgnet.csv", sep=';')
-
+api_key = ''
 app = DjangoDash('history_', external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 
@@ -162,7 +162,7 @@ app.layout = html.Div([body_app])
 def update_cards(value, start_date, end_date):
     
     station = data[data['NOMBRE']==value].reset_index()['ID'][0]
-    url = 'https://api.meteoagronet.com/api/v1/MonuDRQQVoWsCrDKnFSruyGvCToEHU/weatherstation/lastdata?idstation='+ f'{station}'
+    url = f'https://api.meteoagronet.com/api/v1/{api_key}/weatherstation/lastdata?idstation='+ f'{station}'
     response = requests.request("GET", url)
     df_ws=pd.DataFrame(response.json()['last_data'], index=[0])
     date_s = df_ws['report_date_locale'][0]
@@ -170,7 +170,7 @@ def update_cards(value, start_date, end_date):
         
     # Máximos y mínimos día del último envío
     dt_xn = dt_p.strftime('%Y-%m-%d')
-    url2 = f'https://api.meteoagronet.com/api/v1/MonuDRQQVoWsCrDKnFSruyGvCToEHU/weatherstation/rangedata?idstation='+ f'{station}' + f'&date_end={dt_xn}&date_start={dt_xn}'
+    url2 = f'https://api.meteoagronet.com/api/v1/{api_key}/weatherstation/rangedata?idstation='+ f'{station}' + f'&date_end={dt_xn}&date_start={dt_xn}'
     response2 = requests.request("GET", url2)
     df_ws_xn = pd.DataFrame(response2.json()['data_range'])
     df_ws_xn['time'] = df_ws_xn['report_date_locale'].str.slice(12, 16)
@@ -180,7 +180,7 @@ def update_cards(value, start_date, end_date):
     pres_max = float(max(df_ws_xn['pressure_rel_hpa']))
         
     # Máximos y mínimos históricos
-    url3 = f'https://api.meteoagronet.com/api/v1/MonuDRQQVoWsCrDKnFSruyGvCToEHU/weatherstation/rangedata?idstation='+ f'{station}' + f'&date_end={end_date}&date_start={start_date}'
+    url3 = f'https://api.meteoagronet.com/api/v1/{api_key}/weatherstation/rangedata?idstation='+ f'{station}' + f'&date_end={end_date}&date_start={start_date}'
     response3 = requests.request("GET", url3)
     df_wsh = pd.DataFrame(response3.json()['data_range'])
     df_wsh['DayOfMonth'] = pd.to_datetime(df_wsh['report_date_locale'], format='%Y-%m-%d %H:%M')
