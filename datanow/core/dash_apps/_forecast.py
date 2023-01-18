@@ -15,8 +15,8 @@ from django_plotly_dash import DjangoDash
 
 
 data = pd.read_csv("core/dash_apps/estaciones_mtgnet.csv", sep=';')
-#api_key = 'UV5tO4P3w5hiLGRWYrhCn0PpTL6B3EaI'
-api_key = 'YGsX7rhgvfFxiX5ymm6hkvQg6hNxt6r2'
+#api_key = ''
+api_key = ''
 
 app = DjangoDash('_forecast', external_stylesheets=[dbc.themes.BOOTSTRAP])
 
