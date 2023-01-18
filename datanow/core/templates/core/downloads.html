@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% load plotly_dash %}
+
+        <div class="{% plotly_class name='_downloads' %} card" style="height:50%; width:100%">
+            {% plotly_app name='_downloads' ratio=0.65 %}
+        </div>
+                
+
+{% endblock %}
